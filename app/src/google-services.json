@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560229237019",
+    "project_id": "blueneba-7fae7",
+    "storage_bucket": "blueneba-7fae7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560229237019:android:3cc24863845b256a7553be",
+        "android_client_info": {
+          "package_name": "com.exp.blueneba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjq97AsOC-n1xNkS2wORW4BWq4r9KZNNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

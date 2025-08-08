@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.exp.blueneba">
+
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:name="com.exp.blueneba.helper.MyApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/gajra_gear_log"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/gajra_gear_log"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:node="merge">
+        <activity
+            android:name="com.exp.blueneba.activity.NotificationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.TaskActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.OpportunityViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.LeadDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.LeadActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.NewSalesDetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.exp.blueneba.activity.PartiallyDispatchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.exp.blueneba.activity.ProductCatalogActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.exp.blueneba.activity.SarthidetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.exp.blueneba.activity.CustomerHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.exp.blueneba.activity.OrderDetailEditActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="com.exp.blueneba.activity.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--
+        <activity android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+        <activity
+            android:name="com.exp.blueneba.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Material" />
+        <activity
+            android:name="com.exp.blueneba.activity.UserReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Material" />
+        <activity
+            android:name="com.exp.blueneba.activity.CameraCustomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.OrderDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.AttendanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.TaskListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.TaskDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.OrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.PointCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.AddPointCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.AddTaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.MyProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.PaymentReceivedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.OutstandingPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.ProductDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.CustomerEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.ProductSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.VisitReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity
+            android:name="com.exp.blueneba.activity.CounterDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.BeatCustomerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.ProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.AddToCartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.InsertSalesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.SalesDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.StoreCustomerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.UpdateCustomerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.exp.blueneba.activity.ReportActivity"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service
+            android:name="com.exp.blueneba.services.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.exp.blueneba.worker.LocationForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+    </application>
+
+</manifest>
