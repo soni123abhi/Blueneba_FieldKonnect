@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exp.blueneba.R
 import com.exp.blueneba.activity.OrderDetailsActivity
 import com.exp.blueneba.model.OrderListModel
-import kotlinx.android.synthetic.main.adapter_sales.view.*
 import kotlin.collections.ArrayList
 
 class OrderListNewAdapter(var activity: Activity, var orderListArr: ArrayList<OrderListModel.Datum?>) :

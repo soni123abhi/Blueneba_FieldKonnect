@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ListView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -40,7 +41,6 @@ import com.exp.blueneba.model.Dataaaaa
 import com.exp.blueneba.model.MSPFilterDataModel
 import com.exp.blueneba.model.MspTabledataModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_m_s_p_report.fragment_container_msp_report
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.HashMap
@@ -55,6 +55,7 @@ class MSPReportFragment(
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     lateinit var linearTop_msp_report: CardView
+    lateinit var fragment_container_msp_report: FrameLayout
     lateinit var cardBack_msp_report: CardView
     lateinit var cardshowww: CardView
     lateinit var tvTitle_msp_report: TextView
@@ -112,6 +113,7 @@ class MSPReportFragment(
         edtyear = rootView.findViewById(R.id.edtyear)
         cardshowww = rootView.findViewById(R.id.cardshowww)
         recyclerView_msp_scheme = rootView.findViewById(R.id.recyclerView_msp_scheme)
+        fragment_container_msp_report = rootView.findViewById(R.id.fragment_container_msp_report)
 
 
         getfilterdata()

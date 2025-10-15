@@ -34,7 +34,6 @@ import com.exp.blueneba.model.NewDealerViewDetailMOdel
 import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_dealer_approal.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -58,6 +57,8 @@ class DealerApproalFragment(
     lateinit var tvTitle_dealer_approval: TextView
     lateinit var cardSearch: RelativeLayout
     lateinit var rel_main_dealer: RelativeLayout
+    lateinit var linearTop_dealer_approval: CardView
+    lateinit var fragment_container_dealer_approval: FrameLayout
     lateinit var cardBack_dealer_approval: CardView
     lateinit var edtSearchbranch: AutoCompleteTextView
     lateinit var edtSearch: AutoCompleteTextView
@@ -110,6 +111,8 @@ class DealerApproalFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         cardFrom = rootView.findViewById(R.id.cardFrom)
+        fragment_container_dealer_approval = rootView.findViewById(R.id.fragment_container_dealer_approval)
+        linearTop_dealer_approval = rootView.findViewById(R.id.linearTop_dealer_approval)
         cardTo = rootView.findViewById(R.id.cardTo)
         cardSearch = rootView.findViewById(R.id.cardSearch)
         tvFrom = rootView.findViewById(R.id.tvFrom)

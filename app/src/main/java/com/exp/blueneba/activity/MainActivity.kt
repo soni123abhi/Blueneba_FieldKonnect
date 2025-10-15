@@ -553,25 +553,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             }
 
             R.id.relativeHome -> {
-                println("Abhiiii=hhh="+customerVisitFlag+"<<"+ tabPosition)
-                linearTop.visibility = View.VISIBLE
-                three_dot.visibility = View.VISIBLE
-                var dashBoardNewFragment = DashBoardNewDesingFragment()
-                dashBoardNewFragment.punchInDetails(this)
-                if (tabPosition != 0) {
-                    goToFragment(dashBoardNewFragment, true)
+                if (customerVisitFlag.equals("default_value")){
+                    linearTop.visibility = View.VISIBLE
+                    three_dot.visibility = View.VISIBLE
+                    var dashBoardNewFragment = DashBoardNewDesingFragment()
+                    dashBoardNewFragment.punchInDetails(this)
+                    if (tabPosition != 0) {
+                        goToFragment(dashBoardNewFragment, true)
 //                    cardBurger.visibility = View.VISIBLE
-                    cardBurger.visibility = View.GONE
-                    cardBack.visibility = View.GONE
-                    println("AKAKKAKAKA==$44")
-                    cardPunch.visibility = View.VISIBLE
-                    cardleave.visibility = View.VISIBLE
-                    allInActive()
-                    imgCHome.visibility = View.VISIBLE
-                    tvHome.setTextColor(Color.parseColor("#00aadb"))
-                    imgHome.setImageDrawable(resources.getDrawable(R.drawable.ic_home_new))
-                    imgHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
-                    tabPosition = 0
+                        cardBurger.visibility = View.GONE
+                        cardBack.visibility = View.GONE
+                        println("AKAKKAKAKA==$44")
+                        cardPunch.visibility = View.VISIBLE
+                        cardleave.visibility = View.VISIBLE
+                        allInActive()
+                        imgCHome.visibility = View.VISIBLE
+                        tvHome.setTextColor(Color.parseColor("#00aadb"))
+                        imgHome.setImageDrawable(resources.getDrawable(R.drawable.ic_home_new))
+                        imgHome.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.colur_dark_blue))
+                        tabPosition = 0
+                }
+                }else{
+                    startActivity(Intent(this@MainActivity,MainActivity::class.java))
                 }
             }
             R.id.cardBack -> {
@@ -680,6 +683,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
             R.id.relativeReport -> {
                 drawerLayout.closeDrawer(GravityCompat.START)
                 customerVisitFlag = "default_value"
+                tabPosition = 2
                 goToFragment(ReportFragment(linearTop, tabPosition,customerVisitFlag), false)
                 allInActive()
                 cardBurger.visibility = View.GONE

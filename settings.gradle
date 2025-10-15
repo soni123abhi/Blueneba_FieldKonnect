@@ -1,5 +1,5 @@
-rootProject.name='Gajra'
+rootProject.name='Blueneba'
 include ':app'
 include ':gaugelibrary'
-rootProject.name = "Gajra New Design"
+rootProject.name = "Blueneba"
 include ':multiselectspinnerlibrary'

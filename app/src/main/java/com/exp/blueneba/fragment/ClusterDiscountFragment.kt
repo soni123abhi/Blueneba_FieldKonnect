@@ -24,7 +24,6 @@ import com.exp.blueneba.connection.ApiClient
 import com.exp.blueneba.helper.*
 import com.exp.blueneba.model.ClusterOrderListModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_cluster_discount.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -42,6 +41,7 @@ class ClusterDiscountFragment(
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     private lateinit var rel_main_cluster: RelativeLayout
+    private lateinit var fragment_container_cluster: FrameLayout
     private lateinit var recyclerView_cluster: RecyclerView
     private lateinit var cardBack_cluster: CardView
     private lateinit var tvTitle_cluster: TextView
@@ -97,6 +97,7 @@ class ClusterDiscountFragment(
         recyclerView_cluster = rootView.findViewById(R.id.recyclerView_cluster)
         tvTitle_cluster = rootView.findViewById(R.id.tvTitle_cluster)
         cardBack_cluster = rootView.findViewById(R.id.cardBack_cluster)
+        fragment_container_cluster = rootView.findViewById(R.id.fragment_container_cluster)
 
         cardFrom = rootView.findViewById(R.id.cardFrom)
         cardTo = rootView.findViewById(R.id.cardTo)

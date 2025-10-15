@@ -39,7 +39,6 @@ import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_tour.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -55,6 +54,7 @@ class TourFragment(var cardBack: CardView, var linearTopreport: CardView,var tab
     lateinit var rec_user_main: RelativeLayout
     lateinit var rec_tour_create: RelativeLayout
     lateinit var rec_tour_view: RelativeLayout
+    lateinit var fragment_container_tour: FrameLayout
     lateinit var tour_view_table: RelativeLayout
     lateinit var cardSearch: RelativeLayout
     lateinit var linearTop_tour: CardView
@@ -151,6 +151,7 @@ class TourFragment(var cardBack: CardView, var linearTopreport: CardView,var tab
         cardbtn_submit_tour_view = rootView.findViewById(R.id.cardbtn_submit_tour_view)
         cardbtn_edit_tour_view = rootView.findViewById(R.id.cardbtn_edit_tour_view)
         tour_view_table = rootView.findViewById(R.id.tour_view_table)
+        fragment_container_tour = rootView.findViewById(R.id.fragment_container_tour)
 
         cardFrom.setOnClickListener(this)
         cardTo.setOnClickListener(this)

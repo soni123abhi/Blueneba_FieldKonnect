@@ -20,21 +20,25 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.exp.blueneba.R
-import kotlinx.android.synthetic.main.activity_camera_custom.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.exp.blueneba.databinding.ActivityCameraCustomBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 class CameraCustomActivity   : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var binding: ActivityCameraCustomBinding
+
     var camera = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera_custom)
+        binding = ActivityCameraCustomBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        setContentView(R.layout.activity_camera_custom)
 
         // hide the action bar
         supportActionBar?.hide()
@@ -94,7 +98,7 @@ class CameraCustomActivity   : AppCompatActivity() {
                     finish()
 
                     val msg = "Photo capture succeeded: $savedUri"
-                   // Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
+                    // Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
                     Log.d(TAG, msg)
                 }
             })
@@ -112,7 +116,7 @@ class CameraCustomActivity   : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(viewFinder.createSurfaceProvider())
+                    it.setSurfaceProvider(binding.viewFinder.createSurfaceProvider())
                 }
 
             imageCapture = ImageCapture.Builder().build()
@@ -120,10 +124,10 @@ class CameraCustomActivity   : AppCompatActivity() {
 
 
             // Select back camera as a default
-           var cameraSelector=  if(camera=="1")
-              CameraSelector.DEFAULT_BACK_CAMERA
+            var cameraSelector=  if(camera=="1")
+                CameraSelector.DEFAULT_BACK_CAMERA
             else
-              CameraSelector.DEFAULT_FRONT_CAMERA
+                CameraSelector.DEFAULT_FRONT_CAMERA
 
             try {
                 // Unbind use cases before rebinding

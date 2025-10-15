@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.exp.blueneba.R
 import com.exp.blueneba.activity.NewSalesDetailActivity
 import com.exp.blueneba.model.SalessListModel
-import kotlinx.android.synthetic.main.adapter_sales.view.*
-import kotlinx.android.synthetic.main.adapter_user_city.view.*
 
 class SalesListNewAdapter(var activity: Activity, var orderListArr: java.util.ArrayList<SalessListModel.sales_Data>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

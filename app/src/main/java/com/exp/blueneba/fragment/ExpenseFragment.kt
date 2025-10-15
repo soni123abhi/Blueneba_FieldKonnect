@@ -28,6 +28,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exp.blueneba.R
@@ -48,7 +49,12 @@ import com.exp.blueneba.model.UserExpenseDetailModel
 import com.exp.blueneba.model.UserExpenseListModel
 import com.exp.import.Utilities
 import id.zelory.compressor.Compressor
-import kotlinx.android.synthetic.main.fragment_expense.*
+import id.zelory.compressor.constraint.default
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -67,6 +73,7 @@ class ExpenseFragment(var cardBack: CardView, var linearTopreport: CardView, var
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     private lateinit var rel_create_expense: NestedScrollView
+    private lateinit var fragment_container_expense: FrameLayout
     private lateinit var rel_main_expense: RelativeLayout
     private lateinit var recyclerView_expense: RecyclerView
     private lateinit var edtexpensetype: AutoCompleteTextView
@@ -76,6 +83,7 @@ class ExpenseFragment(var cardBack: CardView, var linearTopreport: CardView, var
     private lateinit var tv_claim_rate: TextView
     private lateinit var edt_start_km: EditText
     private lateinit var edt_stop_km: EditText
+    private lateinit var edt_exp_note: EditText
     private lateinit var tv_total_km: TextView
     private lateinit var tv_claim_amt: TextView
     lateinit var cardBack_expense: CardView
@@ -190,6 +198,8 @@ class ExpenseFragment(var cardBack: CardView, var linearTopreport: CardView, var
         tvTo_list = rootView.findViewById(R.id.tvTo_list)
         edtexpensetypelist = rootView.findViewById(R.id.edtexpensetypelist)
         edtexpensestatus = rootView.findViewById(R.id.edtexpensestatus)
+        fragment_container_expense = rootView.findViewById(R.id.fragment_container_expense)
+        edt_exp_note = rootView.findViewById(R.id.edt_exp_note)
 
 
         rel_main_expense.visibility = View.VISIBLE
@@ -1461,101 +1471,90 @@ class ExpenseFragment(var cardBack: CardView, var linearTopreport: CardView, var
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        println("codeeeeee=="+requestCode+"<<"+INTENTCAMERA+"<<"+INTENTGALLERY+"<<"+INTENTCAMERAEDIT+"<<"+INTENTGALLERYEDIT)
+        println("codeeeeee==$requestCode<<$INTENTCAMERA<<$INTENTGALLERY<<$INTENTCAMERAEDIT<<$INTENTGALLERYEDIT")
 
-
-        if (requestCode == INTENTCAMERA) {
-            if (resultCode == Activity.RESULT_OK) {
-
+        when {
+            requestCode == INTENTCAMERA && resultCode == Activity.RESULT_OK -> {
                 try {
-                    //   val path =    cameraFile
-                    var path: File = data!!.getSerializableExtra("image") as File
-                    Log.v("akram", "path " + StoreCustomerActivity.arrList.size)
+                    val path: File = data!!.getSerializableExtra("image") as File
+                    Log.v("akram", "path ${StoreCustomerActivity.arrList.size}")
                     cameraFile = path
                     imageFile = path.path
-
-                    var compressedImageFile: File? = null
-                    try {
-                        compressedImageFile =
-                            Compressor(activityLocal).setMaxHeight(200)
-                                .setMaxWidth(200)
-                                .setQuality(90).compressToFile(path)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                    }
-
                     base64 = ""
 
-                    selected_image_path2.add(compressedImageFile.toString())
-                    if (selected_image_path2.size == 0){
-                        listView_attach.visibility = View.GONE
-                    }else{
-                        listView_attach.visibility = View.VISIBLE
-                        updateListView()
+                    lifecycleScope.launch {
+                        try {
+                            val compressedImageFile = withContext(Dispatchers.IO) {
+                                Compressor.compress(activityLocal, path) {
+                                    default() // apply default compression options
+                                    resolution(200, 200)  // sets max width & height
+                                    quality(90)           // sets compression quality
+                                }
+                            }
+
+                            // Update UI on main thread
+                            selected_image_path2.add(compressedImageFile.absolutePath)
+                            listView_attach.visibility =
+                                if (selected_image_path2.isEmpty()) View.GONE else View.VISIBLE
+                            updateListView()
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
                     }
 
                 } catch (e: Exception) {
-                    Log.v("akram", "tri inside")
-                }
-
-            }
-        }
-
-        else if (requestCode == INTENTGALLERY && resultCode == Activity.RESULT_OK) {
-            var photoURI = data?.data
-            val uriString: String = photoURI.toString()
-            var pdfName: String? = null
-
-            val imagePath = getDriveFile(photoURI)
-
-            selected_image_path2.add(imagePath)
-            if (selected_image_path2.size == 0){
-                listView_attach.visibility = View.GONE
-            } else{
-                listView_attach.visibility = View.VISIBLE
-                updateListView()
-            }
-        }
-        else if (requestCode == INTENTCAMERAEDIT){
-            try {
-                //   val path =    cameraFile
-                var path: File = data!!.getSerializableExtra("image") as File
-                Log.v("akram", "path " + StoreCustomerActivity.arrList.size)
-                cameraFile = path
-                imageFile = path.path
-
-                var compressedImageFile: File? = null
-                try {
-                    compressedImageFile =
-                        Compressor(activityLocal).setMaxHeight(200)
-                            .setMaxWidth(200)
-                            .setQuality(90).compressToFile(path)
-                } catch (e: IOException) {
+                    Log.v("akram", "try inside")
                     e.printStackTrace()
                 }
-
-                base64 = ""
-                edit_select_imagepath.add(compressedImageFile.toString())
-
-                /*selected_image_path2.add(compressedImageFile.toString())
-                if (selected_image_path2.size == 0){
-                    listView_attach.visibility = View.GONE
-                }else{
-                    listView_attach.visibility = View.VISIBLE
-                    updateListView()
-                }*/
-
-            } catch (e: Exception) {
-                Log.v("akram", "tri inside")
             }
 
-        }
-        else if (requestCode == INTENTGALLERYEDIT && resultCode == Activity.RESULT_OK) {
-            var photoURI = data?.data
-            var edit_image_paths = getDriveFileedit(photoURI)
-            edit_select_imagepath.add(edit_image_paths)
-        }
+            requestCode == INTENTGALLERY && resultCode == Activity.RESULT_OK -> {
+                val photoURI = data?.data
+                val imagePath = getDriveFile(photoURI)
+                selected_image_path2.add(imagePath)
+                listView_attach.visibility =
+                    if (selected_image_path2.isEmpty()) View.GONE else View.VISIBLE
+                updateListView()
+            }
 
+            requestCode == INTENTCAMERAEDIT && resultCode == Activity.RESULT_OK -> {
+                try {
+                    val path: File = data!!.getSerializableExtra("image") as File
+                    Log.v("akram", "path ${StoreCustomerActivity.arrList.size}")
+                    cameraFile = path
+                    imageFile = path.path
+                    base64 = ""
+
+                    lifecycleScope.launch {
+                        try {
+                            val compressedImageFile = withContext(Dispatchers.IO) {
+                                Compressor.compress(activityLocal, path) {
+                                    default() // apply default compression options
+                                    resolution(200, 200)  // sets max width & height
+                                    quality(90)
+                                }
+                            }
+
+                            edit_select_imagepath.add(compressedImageFile.absolutePath)
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    Log.v("akram", "try inside")
+                    e.printStackTrace()
+                }
+            }
+
+            requestCode == INTENTGALLERYEDIT && resultCode == Activity.RESULT_OK -> {
+                val photoURI = data?.data
+                val editImagePath = getDriveFileedit(photoURI)
+                edit_select_imagepath.add(editImagePath)
+            }
+        }
     }
 
     private fun isImageFile(file: File): Boolean {

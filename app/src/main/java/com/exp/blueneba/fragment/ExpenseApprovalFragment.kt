@@ -40,7 +40,6 @@ import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_expense_approval.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -57,8 +56,10 @@ class ExpenseApprovalFragment(
     private lateinit var recyclerView_expense_approval: RecyclerView
     private lateinit var recyclerView_user_detail: RecyclerView
     private lateinit var linearTop_expense_approval: CardView
+    private lateinit var fragment_container_expense_approval: FrameLayout
     private lateinit var cardBack_expense_approval: CardView
     lateinit var tvTitle_expense_approval: TextView
+    lateinit var tv_user_date: TextView
     lateinit var cardFrom: LinearLayout
     lateinit var cardTo: LinearLayout
     lateinit var tvFrom: TextView
@@ -395,6 +396,8 @@ class ExpenseApprovalFragment(
         rec_user_main2 = rootView.findViewById(R.id.rec_user_main2)
         recyclerView_user_detail = rootView.findViewById(R.id.recyclerView_user_detail)
         edtexpensetype = rootView.findViewById(R.id.edtexpensetype)
+        fragment_container_expense_approval = rootView.findViewById(R.id.fragment_container_expense_approval)
+        tv_user_date = rootView.findViewById(R.id.tv_user_date)
 
         rec_user_main2.visibility = View.GONE
         rel_main_expense.visibility = View.VISIBLE

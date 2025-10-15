@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#e7e7e7">
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true">
 
 
     <androidx.cardview.widget.CardView
@@ -96,10 +97,15 @@
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#e7e7e7"
+        android:layout_below="@+id/linearTop"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
         android:id="@+id/rel_lead_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearTop"
         android:background="#FFF">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -251,5 +257,6 @@
         android:layout_height="wrap_content"
         tools:listitem="@layout/opportunity_listing_layout"/>
 
+    </RelativeLayout>
 
 </RelativeLayout>

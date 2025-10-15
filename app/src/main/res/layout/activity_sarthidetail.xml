@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/bg_colour_two">
+    android:background="@color/colorPrimaryDark">
 
 
     <androidx.cardview.widget.CardView
@@ -55,6 +56,12 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/bg_colour_two"
+        android:layout_below="@+id/linearTop_activity"
+        android:layout_height="match_parent">
+
 
     <RelativeLayout
         android:id="@+id/rec_user_main2"
@@ -62,7 +69,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/linearTop_activity"
         android:visibility="visible">
 
         <RelativeLayout
@@ -468,6 +474,7 @@
 
         </RelativeLayout>
 
+    </RelativeLayout>
     </RelativeLayout>
 
 

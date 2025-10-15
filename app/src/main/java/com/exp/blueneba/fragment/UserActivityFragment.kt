@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.RelativeLayout
@@ -43,8 +44,6 @@ import com.exp.import.Utilities
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.fragment_user_activity.fragment_container_activity
-import kotlinx.android.synthetic.main.fragment_user_activity.linearTop_activity
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -64,6 +63,8 @@ class UserActivityFragment(
     lateinit var recyclerView_useractivity: RecyclerView
     lateinit var recyclerView_user_detail: RecyclerView
     lateinit var rec_user_main: RelativeLayout
+    lateinit var fragment_container_activity: FrameLayout
+    lateinit var linearTop_activity: CardView
     lateinit var rec_user_main2: RelativeLayout
     lateinit var cardFrom: LinearLayout
     lateinit var cardTo: LinearLayout
@@ -124,6 +125,8 @@ class UserActivityFragment(
         edtSearch = rootView.findViewById(R.id.edtSearch)
         edtSearchbranch = rootView.findViewById(R.id.edtSearchbranch)
         tv_user_date = rootView.findViewById(R.id.tv_user_date)
+        fragment_container_activity = rootView.findViewById(R.id.fragment_container_activity)
+        linearTop_activity = rootView.findViewById(R.id.linearTop_activity)
 
 
         cardFrom.setOnClickListener(this)

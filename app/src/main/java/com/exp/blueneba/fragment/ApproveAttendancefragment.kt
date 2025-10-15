@@ -35,7 +35,6 @@ import com.exp.blueneba.model.AttendanceSubmitModel
 import com.exp.blueneba.model.UserAttendanceListModel
 import com.exp.import.Utilities
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_approve_attendancefragment.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -66,6 +65,7 @@ class ApproveAttendancefragment(
     lateinit var tvTitle_atten: TextView
     lateinit var cardSearch: RelativeLayout
     lateinit var rec_attendance_main: RelativeLayout
+    lateinit var fragment_container_atten: FrameLayout
     lateinit var cardbtn_submit: CardView
 
     lateinit var radioGroup : RadioGroup
@@ -118,6 +118,7 @@ class ApproveAttendancefragment(
         cardBack_report_atten = rootView.findViewById(R.id.cardBack_report_atten)
         linearTop_report_atten = rootView.findViewById(R.id.linearTop_report_atten)
         fab= rootView.findViewById(R.id.fab_add)
+        fragment_container_atten= rootView.findViewById(R.id.fragment_container_atten)
 
         recyclerView_attendance = rootView.findViewById(R.id.recyclerView_attendance)
         edtSearchbranch = rootView.findViewById(R.id.edtSearchbranch)

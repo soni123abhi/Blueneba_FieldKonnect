@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.exp.blueneba.R
 import com.exp.blueneba.activity.CameraCustomActivity
@@ -43,6 +44,11 @@ import com.exp.blueneba.model.*
 import com.exp.import.Utilities
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.resolution
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -586,59 +592,63 @@ class MarketIntelligenceFragment(var relativeHome: RelativeLayout,var three_dot:
                     imageFile = path.path
 
                     var compressedImageFile: File? = null
-                    try {
-                        compressedImageFile =
-                            Compressor(activityLocal).setMaxHeight(200)
-                                .setMaxWidth(200)
-                                .setQuality(90).compressToFile(path)
-                    } catch (e: IOException) {
-                        e.printStackTrace()
+                    lifecycleScope.launch {
+                        try {
+                            compressedImageFile = withContext(Dispatchers.IO) {
+                                Compressor.compress(activityLocal, path) {
+                                    resolution(200, 200) // replaces setMaxHeight/setMaxWidth
+                                    quality(90)          // replaces setQuality
+                                }
+                            }
+
+                            outletImgFile = compressedImageFile
+                            Glide.with(activityLocal)
+                                .load(compressedImageFile)
+                                .into(imgProfile)
+
+                            base64 = "" // compute base64 if needed
+                            outletImg = base64
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
                     }
-
-                    base64 = ""
-
-                    outletImgFile = compressedImageFile
-                    Glide.with(this)
-                        .load(path.path)
-                        .into(imgProfile)
-                    outletImg = base64
 
                 } catch (e: Exception) {
 
                     Log.v("akram", "tri inside")
                 }
             }
-        } else if (requestCode == INTENTGALLERY) {
+        }
+        else if (requestCode == INTENTGALLERY && resultCode == Activity.RESULT_OK) {
 
-            if (resultCode == Activity.RESULT_OK) {
+            val selectedImageUri: Uri = data!!.data!!
+            val tempPath = Utilities.getPathFromUri(selectedImageUri, activityLocal)
+            val file = File(tempPath)
 
-                val selectedImageUri: Uri = data!!.data!!
-
-                val tempPath =
-                    Utilities.getPathFromUri(selectedImageUri, activityLocal)
-
-                val file = File(tempPath)
-
-
-                var compressedImageFile: File? = null
+            lifecycleScope.launch {
                 try {
-                    compressedImageFile =
-                        Compressor(activityLocal).setMaxHeight(200).setMaxWidth(200)
-                            .setQuality(90).compressToFile(file)
+                    val compressedImageFile = withContext(Dispatchers.IO) {
+                        Compressor.compress(activityLocal, file) {
+                            resolution(200, 200) // sets max width & height
+                            quality(90)          // sets quality
+                        }
+                    }
+
+                    base64 = "" // generate base64 if needed
+
+                    // Update UI on main thread
+                    outletImgFile = compressedImageFile
+                    Glide.with(activityLocal)
+                        .load(compressedImageFile)
+                        .into(imgProfile)
+
+                    outletImg = base64
+                    imageFile = tempPath
+
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
-                base64 = ""
-
-                outletImgFile = compressedImageFile
-                Glide.with(this)
-                    .load(data.data)
-                    .into(imgProfile)
-                outletImg = base64
-
-                imageFile = tempPath
-
             }
         }
     }

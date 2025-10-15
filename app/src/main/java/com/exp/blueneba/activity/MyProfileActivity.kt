@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import com.exp.import.Utilities
 import com.exp.blueneba.R
 import com.exp.blueneba.connection.APIResultLitener
@@ -28,6 +29,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -125,27 +127,30 @@ class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
         var dialog = DialogClass.progressDialog(this@MyProfileActivity)
 
 
-        var fileToUploadList: MultipartBody.Part?
+        lateinit var fileToUploadList: MultipartBody.Part
 
 
-        if (imageFile.equals("")) {
-            val reqbodyFile = RequestBody.create(MediaType.parse("text"), "")
+        if (imageFile.isNullOrEmpty()) {
+            val reqbodyFile = RequestBody.create(MediaType.parse("text/plain"), "")
             fileToUploadList = MultipartBody.Part.createFormData("image", "")
         } else {
+            val file = File(imageFile)
 
-            var file: File? = File(imageFile)
-            try {
-                file = Compressor(this).compressToFile(file)
-            } catch (e: IOException) {
-                e.printStackTrace()
+            // launch coroutine
+            lifecycleScope.launch {
+                try {
+                    val compressedFile = Compressor.compress(this@MyProfileActivity, file)
+
+                    val reqbodyFileD: RequestBody =
+                        RequestBody.create(MediaType.parse("image/*"), compressedFile)
+                    val fileName = "image"
+                    fileToUploadList = MultipartBody.Part.createFormData(fileName, compressedFile.name, reqbodyFileD)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
-
-            val reqbodyFileD: RequestBody =
-                RequestBody.create(MediaType.parse("image/*"), file)
-            val fileName = "image"
-            fileToUploadList =
-                MultipartBody.Part.createFormData(fileName, file!!.name, reqbodyFileD)
         }
+
 
         ApiClient.updateProfile(
             StaticSharedpreference.getInfo(Constant.ACCESS_TOKEN, this).toString(),
@@ -158,7 +163,7 @@ class MyProfileActivity : AppCompatActivity(), View.OnClickListener {
                         if (response.code() == 200) {
 
                             DialogClass.alertDialog("Success","profile update successfully",this@MyProfileActivity,false)
-                             StaticSharedpreference.saveInfo(Constant.PROFILE_IMAGE,response.body()!!.get("profile_image").asString,this@MyProfileActivity)
+                            StaticSharedpreference.saveInfo(Constant.PROFILE_IMAGE,response.body()!!.get("profile_image").asString,this@MyProfileActivity)
 
                         } else {
 

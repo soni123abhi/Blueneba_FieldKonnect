@@ -30,7 +30,6 @@ import com.exp.blueneba.helper.StaticSharedpreference
 import com.exp.blueneba.model.DistriutorModel
 import com.exp.blueneba.model.SalessListModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_new_sales_report.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -48,6 +47,7 @@ class NewSalesReportFragment(
     lateinit var tvTitle_sales_report: TextView
     lateinit var tvNoDta: TextView
     lateinit var linearTop_sales_report: CardView
+    lateinit var fragment_container_sales_report: FrameLayout
     lateinit var cardBack_sales_back: CardView
     lateinit var rel_main_sales_report: RelativeLayout
     lateinit var recyclerView_orderr: RecyclerView
@@ -106,6 +106,7 @@ class NewSalesReportFragment(
         tvNoDta = rootView.findViewById(R.id.tvNoDta)
         edtstatus = rootView.findViewById(R.id.edtstatus)
         edtSearchcustomer = rootView.findViewById(R.id.edtSearchcustomer)
+        fragment_container_sales_report = rootView.findViewById(R.id.fragment_container_sales_report)
 
         cardFrom = rootView.findViewById(R.id.cardFrom)
         cardTo = rootView.findViewById(R.id.cardTo)

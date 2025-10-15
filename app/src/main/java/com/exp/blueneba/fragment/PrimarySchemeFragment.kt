@@ -28,7 +28,6 @@ import com.exp.blueneba.model.PrimaryFilterListModel
 import com.exp.blueneba.model.PrimarySchemeModel
 import com.exp.blueneba.model.PrimarySchemeTableModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_primary_scheme.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.HashMap
@@ -43,6 +42,7 @@ class PrimarySchemeFragment(
     lateinit var activityLocal: Activity
     private lateinit var rootView: View
     lateinit var linearTop_primary_report: CardView
+    lateinit var fragment_container_primary_report: FrameLayout
     lateinit var cardBack_primary_report: CardView
     lateinit var cardshowww: CardView
     lateinit var textview3: TextView
@@ -113,6 +113,7 @@ class PrimarySchemeFragment(
         rel_dealer_table = rootView.findViewById(R.id.rel_dealer_table)
         recyclerView_primary_scheme = rootView.findViewById(R.id.recyclerView_primary_scheme)
         textview3 = rootView.findViewById(R.id.textview3)
+        fragment_container_primary_report = rootView.findViewById(R.id.fragment_container_primary_report)
 
 
         getfilterdata()

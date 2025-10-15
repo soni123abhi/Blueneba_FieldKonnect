@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ListView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -33,7 +34,6 @@ import com.exp.blueneba.helper.DialogClass
 import com.exp.blueneba.helper.StaticSharedpreference
 import com.exp.blueneba.model.DealergrowthModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_dealer_growth.fragment_container_dealer_growth
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.HashMap
@@ -51,6 +51,7 @@ class DealerGrowthFragment(
     lateinit var tvTitle_dealer_growth: TextView
     lateinit var rel_main_dealer_growth: RelativeLayout
     lateinit var linearTop_dealer_growth: CardView
+    lateinit var fragment_container_dealer_growth: FrameLayout
     lateinit var recyclerView_dealer_growth: RecyclerView
     lateinit var edtSearchdivision: AutoCompleteTextView
     lateinit var edtSearchbranch: AutoCompleteTextView
@@ -104,6 +105,7 @@ class DealerGrowthFragment(
     private fun initViews() {
         linearTopreport.visibility = View.GONE
         cardBack_dealer_growth = rootView.findViewById(R.id.cardBack_dealer_growth)
+        fragment_container_dealer_growth = rootView.findViewById(R.id.fragment_container_dealer_growth)
         tvTitle_dealer_growth = rootView.findViewById(R.id.tvTitle_dealer_growth)
         rel_main_dealer_growth = rootView.findViewById(R.id.rel_main_dealer_growth)
         linearTop_dealer_growth = rootView.findViewById(R.id.linearTop_dealer_growth)

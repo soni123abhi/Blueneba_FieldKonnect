@@ -28,7 +28,6 @@ import com.exp.blueneba.helper.StaticSharedpreference
 import com.exp.blueneba.model.DealerMonthlySalesReport
 import com.exp.blueneba.model.DealerSalesReportModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_dealer_c_yvs_l_y_sales.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.util.HashMap
@@ -46,6 +45,7 @@ class DealerCYvsLYSalesFragment(
     lateinit var cardBack_dealer_sales: CardView
     lateinit var tvTitle_dealer_sales: TextView
     lateinit var linearTop_dealer_sales: CardView
+    lateinit var fragment_container_dealer_sales: FrameLayout
     lateinit var rel_main_dealer_sales: RelativeLayout
     lateinit var recyclerView_dealer_sale: RecyclerView
     lateinit var edtSearch: AutoCompleteTextView
@@ -101,6 +101,7 @@ class DealerCYvsLYSalesFragment(
         edtSearchbranch = rootView.findViewById(R.id.edtSearchbranch)
         edtSearchyear = rootView.findViewById(R.id.edtSearchyear)
         edtSearchdivision = rootView.findViewById(R.id.edtSearchdivision)
+        fragment_container_dealer_sales = rootView.findViewById(R.id.fragment_container_dealer_sales)
 
         getdelaersalesreport(
             page,

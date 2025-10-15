@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                      println("uniqueIddd=="+uniqueIddd)
 
                      val packageInfo = packageManager.getPackageInfo(packageName, 0)
-                     val currentVersion = packageInfo.versionName
+                     val currentVersion = packageInfo.versionName ?: ""
                      login(deviceName,currentVersion,uniqueIddd)
                  }
             }

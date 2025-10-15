@@ -25,8 +25,6 @@ import com.exp.blueneba.helper.DialogClass
 import com.exp.blueneba.helper.StaticSharedpreference
 import com.exp.blueneba.model.SpecialDiscountModel
 import com.exp.import.Utilities
-import kotlinx.android.synthetic.main.fragment_cluster_discount.*
-import kotlinx.android.synthetic.main.fragment_special_discount.*
 import org.json.JSONObject
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -46,6 +44,7 @@ class SpecialDiscountFragment(
     private lateinit var cardBack_special: CardView
     private lateinit var tvTitle_special: TextView
     private lateinit var rel_main_special: RelativeLayout
+    private lateinit var fragment_container_special: FrameLayout
     private lateinit var recyclerView_special: RecyclerView
     private lateinit var edtSearch: AutoCompleteTextView
     private lateinit var edtSearchstatus: AutoCompleteTextView
@@ -98,6 +97,7 @@ class SpecialDiscountFragment(
         recyclerView_special = rootView.findViewById(R.id.recyclerView_special)
         edtSearch = rootView.findViewById(R.id.edtSearch)
         edtSearchstatus = rootView.findViewById(R.id.edtSearchstatus)
+        fragment_container_special = rootView.findViewById(R.id.fragment_container_special)
 
         cardFrom_special = rootView.findViewById(R.id.cardFrom_special)
         cardTo_special = rootView.findViewById(R.id.cardTo_special)
